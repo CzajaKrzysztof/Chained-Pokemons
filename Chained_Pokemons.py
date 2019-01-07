@@ -1,3 +1,4 @@
+import os
 import pokemon_names
 
 
@@ -27,11 +28,32 @@ def check_if_pokemon_correct(pokemon_name, pokemons_names_used, pokemon_names_li
 def main():
     user_one_name = get_user_name("User one")
     user_two_name = get_user_name("User two")
-    pokemons_names_used = []
     while True:
-        pokemon_name = get_pokemon_name(user_one_name)
-        is_answer_correct = check_if_pokemon_correct(pokemon_name, pokemons_names_used,
-                                                     pokemon_names.pokemons_name_list)
+        pokemons_names_used = []
+        os.system('clear')
+        while True:
+            pokemon_name = get_pokemon_name(user_one_name)
+            os.system('clear')
+            is_answer_correct = check_if_pokemon_correct(pokemon_name, pokemons_names_used,
+                                                         pokemon_names.pokemons_name_list)
+            if is_answer_correct:
+                pokemon_name = get_pokemon_name(user_two_name)
+                os.system('clear')
+                is_answer_correct = check_if_pokemon_correct(pokemon_name, pokemons_names_used,
+                                                             pokemon_names.pokemons_name_list)
+                if is_answer_correct is not True:
+                    print("{0} your anser was wrong. You lose.".format(user_two_name))
+                    break
+            else:
+                print("{0} your anser was wrong. You lose.".format(user_one_name))
+                break
+
+        repeat_game = input("\nDo you want to play again (y/n)? ")
+        if repeat_game == 'y':
+            continue
+        else:
+            os.system('clear')
+            break
 
 
 if __name__ == '__main__':
