@@ -11,8 +11,17 @@ def get_pokemon_name(user_name):
     return pokemon_name
 
 
+def add_used_pokemon_name(pokemon_name, pokemons_names_used):
+    pokemons_names_used.append(pokemon_name)
+
+
 def check_if_pokemon_correct(pokemon_name, pokemons_names_used, pokemon_names_list):
-    print(pokemon_names_list)
+    if pokemon_name not in pokemon_names_list or pokemon_name in pokemons_names_used:
+        is_answer_correct = False
+    else:
+        is_answer_correct = True
+        add_used_pokemon_name(pokemon_name, pokemons_names_used)
+    return is_answer_correct
 
 
 def main():
@@ -21,7 +30,8 @@ def main():
     pokemons_names_used = []
     while True:
         pokemon_name = get_pokemon_name(user_one_name)
-        check_if_pokemon_correct(pokemon_name, pokemons_names_used, pokemon_names.pokemons_name_list)
+        is_answer_correct = check_if_pokemon_correct(pokemon_name, pokemons_names_used,
+                                                     pokemon_names.pokemons_name_list)
 
 
 if __name__ == '__main__':
